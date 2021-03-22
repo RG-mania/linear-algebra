@@ -19,7 +19,7 @@ def detBareiss(arr):
     return arr[arrsize-1][arrsize-1]
 
 def main():
-    arr = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
+    arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
     print(detBareiss(arr))
 
 if __name__ == "__main__":
