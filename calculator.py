@@ -46,22 +46,23 @@ def sysEquationsBareiss(arr):
     arrsize = len(arr) #number of equations
     numvars = len(arr[0]) - 1
     poffset = 0
-    for k in range(arrsize):
+    for k in range(2):
         for i in range(arrsize):
             if i != k:
-                print('i = ', i)
                 for j in range(numvars+1):
                     if j != k+poffset:
-                        print(arr[i][k + poffset])
+                        #print(arr[i][k + poffset])
                         arr[i][j] = (arr[i][j]*arr[k][k+poffset] - arr[i][k+poffset]*arr[k][j])/divisor
-                        print('arr[{i}][{j}] = {val}'.format(i=i, j=j, val = arr[i][j]))
+                        #print('arr[{i}][{j}] = {val}'.format(i=i, j=j, val = arr[i][j]))
         for l in range(arrsize):
             if l != k:
                 arr[l][k+poffset] = 0
 
         divisor = arr[k][k+poffset]
-        p = k+2
         while (k+1+poffset < numvars and arr[k+1][k+1+poffset] == 0):
+            p = k + 2
+            if k+poffset == numvars:
+                return "System is inconsistent and has no solution"
             while (arr[k+1][k+1+poffset] == 0 and p<arrsize):
                 if (arr[p][k+1+poffset] != 0):
                     print('swapping rows')
@@ -74,20 +75,30 @@ def sysEquationsBareiss(arr):
                 poffset += 1
 
 
+        if k+1+poffset == numvars:
+            if arr[k+1][k+1+poffset] != 0:
+                return "System is inconsistent and has no solution"
+            else:
+                poffset -= 1
+
+    #
+    # for h in range(arrsize):
+    #     print(arr[h][-4])
+
     finVector = []
     for x in range(arrsize):
         div = arr[x][x]
         ans = arr[x][-1]
-        print('ans: ', ans, 'div: ', div)
-        p = 0
-        while div == 0 and p<numvars:
-            p+=1
+        #print('ans: ', ans, 'div: ', div)
+        p = 1
+        while div == 0 and p<numvars-1:
             div = arr[x][x+p]
+            p += 1
         if div == 0:
             if ans == 0:
                 return "System has an infinite solution set"
             else:
-                return "System is inconsistent and has not solution"
+                return "System is inconsistent and has no solution"
         else:
             finVector.append(ans/div)
     return finVector
@@ -96,8 +107,9 @@ def main():
     arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
     arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
     sysEq = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
+    badSys = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
     # print(detBareiss(arr2))
-    print(sysEquationsBareiss(sysEq))
+    print(sysEquationsBareiss(badSys))
 
 if __name__ == "__main__":
     main()
