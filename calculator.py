@@ -1,4 +1,5 @@
 #TODO:
+#UNITTESTING!!!!!!!!!!!!!!!!
 #Solve systems of equations
 #Gram-Schmidt Orthogonalization
 #Finding image/kernel of matrix
