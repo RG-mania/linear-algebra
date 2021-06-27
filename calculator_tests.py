@@ -81,5 +81,26 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(detBareiss(arr5), 0)
 
 
+    #-------------------------------------------------------
+    #Linear System tests
+    #
+    # def test_linear01(self):
+    #     #test with one vector where var is 1 - result should match input
+    #     arr1 = [[1, 3]]
+    #     self.assertEqual(linearSystem(arr1), [1, 3])
+    #     arr2 = [[1, 4]]
+    #     self.assertEqual(linearSystem(arr2), [1, 4])
+    #     arr3 = [[1, 20]]
+    #     self.assertEqual(linearSystem(arr3), [1, 20])
+
+    def test_linear02(self):
+        arr1 = [[3, 1, 9], [2, 1, 7]]
+        self.assertEqual(linearSystem(arr1), [2.0, 3.0])
+        # arr2 = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
+        # self.assertEqual(linearSystem(arr2), [2, 3])
+
+
+
+
 if __name__ == '__main__':
    unittest.main()

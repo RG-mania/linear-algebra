@@ -7,6 +7,32 @@
 #Find inverse of matrix
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
 
+"""Assumes matrix is well formed, and rows and columns have consistent length"""
+#  Prints matrices in a nicely-formatted manner
+def printmatrix(mat):
+    dashmult = 4 #controls length of dashlines relative to matrix size
+    h_len = len(mat[0])
+
+    #print pre-matrix dashline
+    print(" ", end = '')
+    for i in range(h_len*dashmult + 4):
+        print("-", end = '') #no newline
+    print()
+
+    #print matrix
+    for i in range(len(mat)): #each row
+        print(" |", end = '')
+        for j in range(h_len): #each individual element
+            print(f'{mat[i][j]:>4}', end = '')
+        print("  | ")
+
+    #print post-matrix dashline
+    print(" ", end = '')
+    for i in range(h_len*dashmult + 4):
+        print("-", end = '') #no newline
+    print()
+
+
 """Assumes matrix is 2x2"""
 def det2x2(arr):
     if(len(arr) == 2 and len(arr[0]) == 2 and len(arr[1]) == 2):
@@ -45,20 +71,21 @@ def detBareiss(arr):
 
 """Note: The following method assumes that the number of equations is equal to the number of variables"""
 #Edit: it might not - still have to test
+"""Also assumes that the matrix is well-formed - # of rows and columns is consistent"""
 def linearSystem(arr):
     divisor = 1
     arrsize = len(arr) #number of equations
     numvars = len(arr[0]) - 1
     poffset = 0
-    for k in range(2):
+    for k in range(arrsize):
         for i in range(arrsize):
-            if i != k:
+            if i != k: # don't modify row of current pivot
                 for j in range(numvars+1):
-                    if j != k+poffset:
-                        #print(arr[i][k + poffset])
+                    if j != k+poffset: # don't modify column of current pivot
+                                    #print(arr[i][k + poffset])
                         arr[i][j] = (arr[i][j]*arr[k][k+poffset] - arr[i][k+poffset]*arr[k][j])//divisor
-                        #print('arr[{i}][{j}] = {val}'.format(i=i, j=j, val = arr[i][j]))
-        for l in range(arrsize):
+                                    #print('arr[{i}][{j}] = {val}'.format(i=i, j=j, val = arr[i][j]))
+        for l in range(arrsize): #set the column of current pivot to 0
             if l != k:
                 arr[l][k+poffset] = 0
 
@@ -79,16 +106,16 @@ def linearSystem(arr):
                 poffset += 1
 
 
-        if k+1+poffset == numvars:
-            if arr[k+1][k+1+poffset] != 0:
-                return "System is inconsistent and has no solution"
-            else:
-                poffset -= 1
+            if k+1+poffset == numvars:
+                print("Poffset is", poffset)
+                print("K is", k)
+                if arr[k+1][k+1+poffset] != 0:
+                    return "System is inconsistent and has no solution"
+                else:
+                    poffset -= 1
 
-    #
-    # for h in range(arrsize):
-    #     print(arr[h][-4])
 
+    #matrix should now be in row-echelon form
     finVector = []
     for x in range(arrsize):
         div = arr[x][x]
@@ -107,13 +134,16 @@ def linearSystem(arr):
             finVector.append(ans/div)
     return finVector
 
-# def main():
-#     arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
-#     arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
-#     sysEq = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
-#     badSys = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
-#     # print(detBareiss(arr2))
-#     print(linearSystem(badSys))
-#
-# if __name__ == "__main__":
-#     main()
+def main():
+    arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
+    arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
+    sysEq = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
+    badSys = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
+    mat1 = [[1, 2], [3, 4]]
+    mat5 = [[1, 2, 3, 4, 5], [0,0,0,0,0]]
+    arr3 = [[3, 1, 9], [2, 1, 7]]
+    # print(detBareiss(arr2))
+    print(linearSystem(arr3))
+
+if __name__ == "__main__":
+    main()
