@@ -1,5 +1,20 @@
 import unittest
 from calculator import *
+from math import *
+
+inf_sol_msg = "System has an infinite solution set"
+no_sol_msg = "System is inconsistent and has no solution"
+
+"""Assumes v1, v2 are vectors"""
+def vectorsEqual(v1, v2, tol = 0.1):
+    if len(v1) != len(v2):
+        return False
+    if tol < 0:
+        raise ArithmeticError("Tolerance must be greater than 0")
+    for i in range(len(v1)):
+        if not isclose(v1[i], v2[i], rel_tol = tol):
+            return False
+    return True
 
 class TestCalculator(unittest.TestCase):
 
@@ -84,20 +99,29 @@ class TestCalculator(unittest.TestCase):
     #-------------------------------------------------------
     #Linear System tests
     #
-    # def test_linear01(self):
-    #     #test with one vector where var is 1 - result should match input
-    #     arr1 = [[1, 3]]
-    #     self.assertEqual(linearSystem(arr1), [1, 3])
-    #     arr2 = [[1, 4]]
-    #     self.assertEqual(linearSystem(arr2), [1, 4])
-    #     arr3 = [[1, 20]]
-    #     self.assertEqual(linearSystem(arr3), [1, 20])
+    def test_linear01_one_eq(self):
+        #test with one vector where var is 1 - result should match input
+        arr1 = [[1, 3]]
+        self.assertTrue(vectorsEqual(linearSystem(arr1), [3]))
+        arr2 = [[1, 4]]
+        self.assertTrue(vectorsEqual(linearSystem(arr2), [4]))
+        arr3 = [[1, 20]]
+        self.assertTrue(vectorsEqual(linearSystem(arr3), [20]))
 
     def test_linear02(self):
         arr1 = [[3, 1, 9], [2, 1, 7]]
-        self.assertEqual(linearSystem(arr1), [2.0, 3.0])
-        # arr2 = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
-        # self.assertEqual(linearSystem(arr2), [2, 3])
+        a1solve = linearSystem(arr1)
+        self.assertTrue(vectorsEqual(a1solve, [2.0, 3.0]))
+        arr2 = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
+        a2solve = linearSystem(arr2)
+        self.assertTrue(vectorsEqual(a2solve, [1, 0, 2]))
+
+    def test_linear03(self):
+        arr1 = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
+        self.assertEqual(linearSystem(arr1), no_sol_msg)
+        arr2 = [[1, 1, 1, 3], [2, 2, 3, 8], [1, 2, 2, 5]]
+        a2solve = linearSystem(arr2)
+        self.assertTrue(vectorsEqual(a2solve, [1, 0, 2]))
 
 
 

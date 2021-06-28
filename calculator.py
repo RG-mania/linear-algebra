@@ -90,25 +90,28 @@ def linearSystem(arr):
                 arr[l][k+poffset] = 0
 
         divisor = arr[k][k+poffset]
-        while (k+1+poffset < numvars and arr[k+1][k+1+poffset] == 0):
-            p = k + 2
-            if k+poffset == numvars:
+        # Below: Swapping rows, incrementing poffset if necessary (Happens when next divisor to-be is 0)
+        # SWAP TO THE START OF FOR LOOP, INSTEAD OF END OF PREVIOUS (case where arr[0][0] == 0)
+        while (k+1+poffset < numvars and arr[k+1][k+1+poffset] == 0): # not on last column, next divisor would be 0
+            p = k + 2 #row below - to swap
+            if k+poffset == numvars: #??? Should never reach here
                 return "System is inconsistent and has no solution"
             while (arr[k+1][k+1+poffset] == 0 and p<arrsize):
-                if (arr[p][k+1+poffset] != 0):
+                if (arr[p][k+1+poffset] != 0): # if row to swap has valid divisor, then swap
                     print('swapping rows')
                     temp = arr[k+1]
                     arr[k+1] = arr[p]
                     arr[p] = temp
                 else:
                     p += 1
-            if arr[k+1][k+1+poffset] == 0:
+            if arr[k+1][k+1+poffset] == 0: # if we haven't found a suitable swap, increment the poffset to next column
+                                           # should only happen when we have a column of 0s below divisor to-be
                 poffset += 1
 
-
+            # if we have a row of 0s?? Should only happen when we're gonna end
             if k+1+poffset == numvars:
-                print("Poffset is", poffset)
-                print("K is", k)
+                # print("Poffset is", poffset)
+                # print("K is", k)
                 if arr[k+1][k+1+poffset] != 0:
                     return "System is inconsistent and has no solution"
                 else:
