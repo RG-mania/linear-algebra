@@ -65,7 +65,7 @@ def detBareiss(arr):
                 # print(arr[p])
                 negmult *= -1
             else:
-                p+=1
+                p+=1 
 
     return arr[arrsize-1][arrsize-1]*negmult
 
