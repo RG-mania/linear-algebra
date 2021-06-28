@@ -2,6 +2,7 @@ import unittest
 from calculator import *
 from math import *
 
+#error messages
 inf_sol_msg = "System has an infinite solution set"
 no_sol_msg = "System is inconsistent and has no solution"
 
