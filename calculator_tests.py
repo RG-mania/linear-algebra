@@ -123,6 +123,8 @@ class TestCalculator(unittest.TestCase):
         arr2 = [[1, 1, 1, 3], [2, 2, 3, 8], [1, 2, 2, 5]]
         a2solve = linearSystem(arr2)
         self.assertTrue(vectorsEqual(a2solve, [1, 0, 2]))
+        arr3 = [[1, 1, 1, 3], [1, 1, 1, 3], [1, 2, 2, 5]]
+        self.assertEqual(linearSystem(arr3), inf_sol_msg)
 
 
 
