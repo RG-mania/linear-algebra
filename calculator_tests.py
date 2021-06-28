@@ -32,7 +32,7 @@ class TestCalculator(unittest.TestCase):
 
     def test_detBareiss_01(self):
         arr1 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
-        arr2 = [[0, 3], [0, 6]]
+        arr2 = [[0, 3], [0, 6]] 
         arr3 = [[2, 1], [8, 4]]
         arr4 = [[15, 2], [4, 3]]
         arr5 = [[2, 2], [4, 6]]
