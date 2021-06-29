@@ -147,6 +147,24 @@ def linearSystem(arr):
             finVector.append(ans/div)
     return finVector
 
+
+"""Checks if matrix is in reduced row echelon form"""
+def confirm_rref(arr):
+    poffset = 0
+    for i in range(len(arr)):
+        j = 0
+        while j < len(arr[i]) and arr[i][j] == 0:
+            j += 1
+        if j < i+poffset:
+            return False
+        else:
+            poffset = j-i
+            for x in range(len(arr)):
+                if x != j and j<len(arr[x]) and arr[x][j] != 0:
+                    return False
+    return True
+
+
 def main():
     arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
     arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]

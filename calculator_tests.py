@@ -142,6 +142,24 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(a3solve, [1, 0.5, 2.5])
 
 
+    def test_confirm_rref_01(self):
+        arr1 = [[1, 0, 0],
+                [0, 1, 0],
+                [0, 0, 2]]
+        arr2 = [[1, 2, 3],
+                [2, 1, 3],
+                [0, 0, 2]]
+        arr3 = [[0, 2, 3],
+                [0, 0, 0],
+                [2, 0, 0]]
+        arr4 = [[1, 0, 0],
+                [0, 1, 0],
+                [0, 0, 0]]
+        self.assertTrue(confirm_rref(arr1))
+        self.assertFalse(confirm_rref(arr2))
+        self.assertFalse(confirm_rref(arr3))
+        self.assertTrue(confirm_rref(arr4))
+
 
 
 if __name__ == '__main__':
