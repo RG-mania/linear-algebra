@@ -127,6 +127,10 @@ class TestCalculator(unittest.TestCase):
         arr3 = [[1, 1, 1, 3], [1, 1, 1, 3], [1, 2, 2, 5]]
         self.assertEqual(linearSystem(arr3), inf_sol_msg)
 
+    # def test_linear04_inf(self):
+    #     arr1 = [[1, 1, 1, 3],
+    #             [1, 1, 1, 4]]
+
 
 
 
