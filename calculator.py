@@ -6,6 +6,7 @@
 #Finding rank of matrix
 #Find inverse of matrix
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
+#Implement GUI
 
 """Assumes matrix is well formed, and rows and columns have consistent length"""
 #  Prints matrices in a nicely-formatted manner
@@ -69,16 +70,13 @@ def detBareiss(arr):
 
     return arr[arrsize-1][arrsize-1]*negmult
 
-"""Note: The following method assumes that the number of equations is equal to the number of variables"""
-#Edit: it might not - still have to test
-"""Also assumes that the matrix is well-formed - # of rows and columns is consistent"""
-def linearSystem(arr):
+"""Transforms a matrix into reduced row echelon form - needs testing"""
+def rref(arr):
     divisor = 1
     arrsize = len(arr) #number of equations
     numvars = len(arr[0]) - 1
     poffset = 0
     for k in range(arrsize):
-
         # Below: Swapping rows, incrementing poffset if necessary (Happens when next divisor to-be is 0)
         while (k+poffset < numvars and arr[k][k+poffset] == 0): # not on last column, next divisor would be 0
             p = k + 1 #row below - to swap
@@ -99,13 +97,16 @@ def linearSystem(arr):
 
         # if we have a row of 0s?? Should only happen when we're gonna end
         if k+poffset == numvars:
+            break # row of 0s, break and end
             # print("Poffset is", poffset)
             # print("K is", k)
-            if arr[k][k+poffset] != 0:
-                return "System is inconsistent and has no solution"
-            else:
-                poffset -= 1
-
+            # if arr[k][k+poffset] != 0:
+            #     break # break out of for loop
+            #     return "System is inconsistent and has no solution"
+            # else:
+            #     poffset -= 1
+            #     break
+        
         for i in range(arrsize):
             if i != k: # don't modify row of current pivot
                 for j in range(numvars+1):
@@ -119,15 +120,22 @@ def linearSystem(arr):
 
         divisor = arr[k][k+poffset]
 
+"""Note: The following method assumes that the number of equations is equal to the number of variables"""
+#Edit: it might not - still have to test
+"""Also assumes that the matrix is well-formed - # of rows and columns is consistent"""
+def linearSystem(arr):
+    arrsize = len(arr) #number of equations
+    numvars = len(arr[0]) - 1
 
-    #matrix should now be in row-echelon form
+    rref(arr)
+    #matrix should now be in reduced row-echelon form
     finVector = []
     for x in range(arrsize):
         div = arr[x][x]
         ans = arr[x][-1]
         #print('ans: ', ans, 'div: ', div)
         p = 1
-        while div == 0 and p<numvars-1:
+        while div == 0 and (x+p)<numvars-1:
             div = arr[x][x+p]
             p += 1
         if div == 0:

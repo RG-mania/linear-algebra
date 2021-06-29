@@ -119,17 +119,27 @@ class TestCalculator(unittest.TestCase):
 
     def test_linear03(self):
         arr1 = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
-        self.assertEqual(linearSystem(arr1), no_sol_msg)
+        a1solve = linearSystem(arr1)
+        self.assertEqual(a1solve, no_sol_msg)
         arr2 = [[1, 1, 1, 3], [2, 2, 3, 8], [1, 2, 2, 5]]
         a2solve = linearSystem(arr2)
         self.assertTrue(vectorsEqual(a2solve, [1, 0, 2]))
-        #breaks on infinite solutions
         arr3 = [[1, 1, 1, 3], [1, 1, 1, 3], [1, 2, 2, 5]]
-        self.assertEqual(linearSystem(arr3), inf_sol_msg)
+        a3solve = linearSystem(arr3)
+        self.assertEqual(a3solve, inf_sol_msg)
 
-    # def test_linear04_inf(self):
-    #     arr1 = [[1, 1, 1, 3],
-    #             [1, 1, 1, 4]]
+    def test_linear04_inf(self):
+        arr1 = [[0, 0]]
+        self.assertEqual(linearSystem(arr1), inf_sol_msg)
+        arr2 = [[0, 1, 1, 3],
+                [1, 1, 1, 4],
+                [1, 2, 2, 5]]
+        self.assertEqual(linearSystem(arr2), no_sol_msg)
+        arr3 = [[0, 1, 1, 3],
+                [0, 0, 2, 5],
+                [1, 1, 1, 4]]
+        a3solve = linearSystem(arr3)
+        self.assertEqual(a3solve, [1, 0.5, 2.5])
 
 
 
