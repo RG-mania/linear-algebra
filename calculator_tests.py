@@ -99,7 +99,7 @@ class TestCalculator(unittest.TestCase):
 
     #-------------------------------------------------------
     #Linear System tests
-    #
+    
     def test_linear01_one_eq(self):
         #test with one vector where var is 1 - result should match input
         arr1 = [[1, 3]]
@@ -123,6 +123,7 @@ class TestCalculator(unittest.TestCase):
         arr2 = [[1, 1, 1, 3], [2, 2, 3, 8], [1, 2, 2, 5]]
         a2solve = linearSystem(arr2)
         self.assertTrue(vectorsEqual(a2solve, [1, 0, 2]))
+        #breaks on infinite solutions
         arr3 = [[1, 1, 1, 3], [1, 1, 1, 3], [1, 2, 2, 5]]
         self.assertEqual(linearSystem(arr3), inf_sol_msg)
 
