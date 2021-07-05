@@ -17,6 +17,15 @@ def vectorsEqual(v1, v2, tol = 0.1):
             return False
     return True
 
+"""Assumes arr1, arr2 are 2d arrays representing matrices"""
+def matricesEqual(arr1, arr2, tol = 0.1):
+    if len(arr1) != len(arr2):
+        return False
+    for i in range(len(arr1)):
+        if not vectorsEqual(arr1[i], arr2[i], tol):
+            return False
+    return True
+
 class TestCalculator(unittest.TestCase):
 
     def test_2x2det_01(self):
@@ -155,10 +164,49 @@ class TestCalculator(unittest.TestCase):
         arr4 = [[1, 0, 0],
                 [0, 1, 0],
                 [0, 0, 0]]
+        arr5 = [[1, 2, 0],
+                [0, 1, 0],
+                [0, 0, 4]]
         self.assertTrue(confirm_rref(arr1))
         self.assertFalse(confirm_rref(arr2))
         self.assertFalse(confirm_rref(arr3))
         self.assertTrue(confirm_rref(arr4))
+        self.assertFalse(confirm_rref(arr5))
+
+
+    #----------------------------------------------------------------
+
+    def test_create_identity01(self):
+        i0 = []
+        i1 = [[1]]
+        i2 = [[1, 0],
+              [0, 1]]
+        i3 = [[1, 0, 0],
+              [0, 1, 0],
+              [0, 0, 1]]
+        i4 = [[1, 0, 0, 0],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [0, 0, 0, 1]]
+        i5 = [[1, 0, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 0, 1]]
+        self.assertTrue(matricesEqual(i0, identity_mat(0)))
+        self.assertTrue(matricesEqual(i1, identity_mat(1)))
+        self.assertTrue(matricesEqual(i2, identity_mat(2)))
+        self.assertTrue(matricesEqual(i3, identity_mat(3)))
+        self.assertTrue(matricesEqual(i4, identity_mat(4)))
+        self.assertTrue(matricesEqual(i5, identity_mat(5)))
+
+    def test_dup_arr01(self):
+        a1 = identity_mat(3)
+        new_a1 = dup_mat(a1)
+        self.assertTrue(matricesEqual(a1, new_a1))
+        new_a1[1][0] = 2
+        self.assertFalse(matricesEqual(a1, new_a1))
+
 
 
 

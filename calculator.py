@@ -148,6 +148,22 @@ def linearSystem(arr):
     return finVector
 
 
+"""Creates identity matrix given size"""
+def identity_mat(size):
+    if size == 0:
+        return []
+    arr = [[0 for i in range(size)] for j in range(size)]
+    for i in range(size):
+        arr[i][i] = 1
+    return arr
+
+"""Duplicates array"""
+def dup_mat(arr):
+    new_arr = [None] * len(arr)
+    for i in range(len(arr)):
+        new_arr[i] = arr[i].copy()
+    return new_arr
+
 """Checks if matrix is in reduced row echelon form"""
 def confirm_rref(arr):
     poffset = 0
