@@ -230,6 +230,12 @@ class TestCalculator(unittest.TestCase):
         self.assertTrue(matricesEqual(arr3, identity_mat(7)))
 
 
+    # def test_multiply_01(self):
+    #     arr1 = [[1, 0],
+    #             [0, 1]]
+    #     arr2 = [[2, 0],
+    #             [0, 2]]
+
 
 
 if __name__ == '__main__':

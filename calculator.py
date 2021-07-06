@@ -198,6 +198,20 @@ def invert(arr):
 
     return arr
 
+"""Assuems matrix columns and rows have consistent lengths"""
+def multiply(arr1, arr2):
+    if len(arr1[0]) != len(arr2):
+        raise ValueError("Matrices cannot be multiplied (dimensions do not match")
+    #initialize product array
+    prod = [[0 for i in range(len(arr1))] for j in range(len(arr2[0]))]
+    #multiply matrices
+    for i in range(len(prod)):
+        for j in range(len(prod[0])):
+            for k in range(len(arr1[0])):
+                prod[i][j] += arr1[i][k] * arr2[k][j]
+    return prod
+
+
 """Checks if matrix is in reduced row echelon form"""
 def confirm_rref(arr):
     poffset = 0
