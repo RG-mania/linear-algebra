@@ -207,6 +207,28 @@ class TestCalculator(unittest.TestCase):
         new_a1[1][0] = 2
         self.assertFalse(matricesEqual(a1, new_a1))
 
+    #----------------------------------------------------------
+
+    def test_invert_matrix01(self):
+        arr1 = [[1, 2],
+                [3, 4]]
+        arr2 = [[2, 0, 0],
+                [0, 1, 0],
+                [0, 0, 1]]
+        arr3 = identity_mat(7)
+        invert(arr1)
+        invert(arr2)
+        invert(arr3)
+        arr1_inv = [[-2, 1],
+                    [1.5, -0.5]]
+        arr2_inv = [[0.5, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1]]
+
+        self.assertTrue(matricesEqual(arr1, arr1_inv))
+        self.assertTrue(matricesEqual(arr2, arr2_inv))
+        self.assertTrue(matricesEqual(arr3, identity_mat(7)))
+
 
 
 

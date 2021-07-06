@@ -40,7 +40,7 @@ def det2x2(arr):
         det = arr[0][0]*arr[1][1] - arr[0][1]*arr[1][0]
         return det
     else:
-        raise NameError('Array is not 2x2')
+        raise ValueError('Array is not 2x2')
 
 """Assumes matrix is square"""
 def detBareiss(arr):
@@ -163,6 +163,40 @@ def dup_mat(arr):
     for i in range(len(arr)):
         new_arr[i] = arr[i].copy()
     return new_arr
+
+"""Returns true if the matrix is square, false otherwise"""
+def isSquare(arr):
+    numRows = len(arr)
+    for i in range(numRows):
+        if len(arr[i]) != numRows:
+            return False
+    return True
+
+"""Returns the inverse of a matrix, assumes it is square"""
+def invert(arr):
+    arrsize = len(arr)
+
+    if not isSquare(arr):
+        raise ValueError("Matrix is not square")
+    determinant = detBareiss(dup_mat(arr))
+    if determinant == 0:
+        raise ValueError("Matrix is not invertible (determinant 0)")
+
+    identity = identity_mat(len(arr))
+    for i in range(len(arr)):
+        arr[i].extend(identity[i])
+    rref(arr)
+
+    #chop off unused left size, divide the whole thing by determinant
+    for i in range(len(arr)):
+        arr[i] = arr[i][-arrsize:]
+        for j in range(arrsize):
+            arr[i][j] = arr[i][j] / determinant
+            #convert to int if possible, to make it look nice
+            if arr[i][j].is_integer():
+                arr[i][j] = int(arr[i][j])
+
+    return arr
 
 """Checks if matrix is in reduced row echelon form"""
 def confirm_rref(arr):
