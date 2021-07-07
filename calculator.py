@@ -235,6 +235,7 @@ def confirm_rref(arr):
             return False
         else:
             poffset = j-i-1 #-1 to account for i being incremented next loop
+            #check for all 0s in column with a leading number
             for x in range(len(arr)):
                 if x != i and j<len(arr[x]) and arr[x][j] != 0:
                     return False

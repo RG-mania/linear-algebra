@@ -158,9 +158,9 @@ class TestCalculator(unittest.TestCase):
                    [0, 0, 1, 1],
                    [0, 0, 0, 0]]
         rref(arr1)
-        printmatrix(arr1)
         self.assertTrue(matricesEqual(arr1, arr1sol))
         self.assertTrue(confirm_rref(arr1sol))
+        self.assertEqual(rank(arr1), 2)
 
     def test_confirm_rref_01(self):
         arr1 = [[1, 0, 0],
@@ -259,17 +259,21 @@ class TestCalculator(unittest.TestCase):
         self.assertTrue(matricesEqual(arr3, identity_mat(7)))
 
 
-    # def test_multiply_01(self):
-    #     arr1 = [[1, 0],
-    #             [0, 1]]
-    #     arr2 = [[2, 0],
-    #             [0, 2]]
+    def test_multiply_01(self):
+        arr1 = [[1, 2],
+                [3, 4]]
+        arr2 = [[2, 0],
+                [0, 2]]
+        prod12 = [[2, 4],
+                  [6, 8]]
+        self.assertTrue(matricesEqual(multiply(arr1, arr2), prod12))
 
     def test_rank01(self):
         arr1 = identity_mat(4)
         self.assertEqual(rank(arr1), 4)
         arr2 = identity_mat(1)
         self.assertEqual(rank(arr2), 1)
+
 
 
 
