@@ -150,6 +150,15 @@ class TestCalculator(unittest.TestCase):
         a3solve = linearSystem(arr3)
         self.assertEqual(a3solve, [1, 0.5, 2.5])
 
+    def test_rref01(self):
+        arr1 = [[1, 1, 1, 3],
+                [1, 1, 2, 4],
+                [1, 1, 3, 5]]
+        arr1sol = [[1, 1, 0, 2],
+                   [0, 0, 1, 1],
+                   [0, 0, 0, 0]]
+        self.assertTrue(matricesEqual(rref(arr1), arr1sol))
+        self.assertTrue(confirm_rref(arr1sol))
 
     def test_confirm_rref_01(self):
         arr1 = [[1, 0, 0],
