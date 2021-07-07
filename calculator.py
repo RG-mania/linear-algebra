@@ -3,7 +3,7 @@
 #Solve systems of equations - DONE ( I think, needs more testing )
 #Gram-Schmidt Orthogonalization
 #Finding image/kernel of matrix
-#Finding rank of matrix
+#Finding rank of matrix - DONE ( I think, needs more testing )
 #Find inverse of matrix - DONE ( I think, needs more testing )
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
 #Implement GUI
@@ -234,9 +234,9 @@ def confirm_rref(arr):
         if j < i+poffset:
             return False
         else:
-            poffset = j-i
+            poffset = j-i-1 #-1 to account for i being incremented next loop
             for x in range(len(arr)):
-                if x != j and j<len(arr[x]) and arr[x][j] != 0:
+                if x != i and j<len(arr[x]) and arr[x][j] != 0:
                     return False
     return True
 

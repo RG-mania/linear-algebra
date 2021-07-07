@@ -167,11 +167,29 @@ class TestCalculator(unittest.TestCase):
         arr5 = [[1, 2, 0],
                 [0, 1, 0],
                 [0, 0, 4]]
+        arr6 = [[1, 2, -3],
+                [0, 1, 3],
+                [0, 0, 4]]
+        arr7 = [[1, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]]
+        arr8 = [[1, 0, 3, 0],
+                [0, 2, 1, 0],
+                [0, 0, 0, 1],
+                [0, 0, 0, 0]]
+        arr9 = [[1, 0, 0, 3],
+                [0, 4, 0, 2],
+                [0, 0, 3, 1],
+                [0, 0, 0, 0]]
         self.assertTrue(confirm_rref(arr1))
         self.assertFalse(confirm_rref(arr2))
         self.assertFalse(confirm_rref(arr3))
         self.assertTrue(confirm_rref(arr4))
         self.assertFalse(confirm_rref(arr5))
+        self.assertFalse(confirm_rref(arr6))
+        self.assertTrue(confirm_rref(arr7))
+        self.assertTrue(confirm_rref(arr8))
+        self.assertTrue(confirm_rref(arr9))
 
 
     #----------------------------------------------------------------
