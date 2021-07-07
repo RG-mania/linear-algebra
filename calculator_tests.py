@@ -157,7 +157,9 @@ class TestCalculator(unittest.TestCase):
         arr1sol = [[1, 1, 0, 2],
                    [0, 0, 1, 1],
                    [0, 0, 0, 0]]
-        self.assertTrue(matricesEqual(rref(arr1), arr1sol))
+        rref(arr1)
+        printmatrix(arr1)
+        self.assertTrue(matricesEqual(arr1, arr1sol))
         self.assertTrue(confirm_rref(arr1sol))
 
     def test_confirm_rref_01(self):
