@@ -1,10 +1,10 @@
 #TODO:
 #UNITTESTING!!!!!!!!!!!!!!!!
-#Solve systems of equations
+#Solve systems of equations - DONE ( I think, needs more testing )
 #Gram-Schmidt Orthogonalization
 #Finding image/kernel of matrix
 #Finding rank of matrix
-#Find inverse of matrix
+#Find inverse of matrix - DONE ( I think, needs more testing )
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
 #Implement GUI
 
@@ -197,6 +197,18 @@ def invert(arr):
                 arr[i][j] = int(arr[i][j])
 
     return arr
+
+"""Find the rank of a matrix"""
+def rank(arr):
+    rref(arr)
+    rank = 0
+    for i in range(len(arr)):
+        for j in range(len(arr[0])):
+            if arr[i][j] != 0:
+                rank += 1
+                break
+    return rank
+
 
 """Assuems matrix columns and rows have consistent lengths"""
 def multiply(arr1, arr2):

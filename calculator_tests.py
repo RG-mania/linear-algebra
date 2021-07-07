@@ -236,6 +236,12 @@ class TestCalculator(unittest.TestCase):
     #     arr2 = [[2, 0],
     #             [0, 2]]
 
+    def test_rank01(self):
+        arr1 = identity_mat(4)
+        self.assertEqual(rank(arr1), 4)
+        arr2 = identity_mat(1)
+        self.assertEqual(rank(arr2), 1)
+
 
 
 if __name__ == '__main__':
