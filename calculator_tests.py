@@ -283,12 +283,30 @@ class TestCalculator(unittest.TestCase):
                  [0, 0, 0]]
         ker01 = transpose([[-3, -2, 1]])
         self.assertTrue(matricesEqual(kernel(arr01), ker01))
-        # arr02 = [[1, 2, 3, 4],
-        #          [0, 1, 2, 3],
-        #          [0, 0, 0, 1]]
-        # ker02 = transpose([[1, -2, 1, 0]])
-        # printmatrix(kernel(arr02))
-        # self.assertTrue(matricesEqual(kernel(arr02), ker02))
+        arr02 = [[1, 2, 3, 4],
+                 [0, 1, 2, 3],
+                 [0, 0, 0, 1]]
+        ker02 = transpose([[1, -2, 1, 0]])
+        self.assertTrue(matricesEqual(kernel(arr02), ker02))
+        arr03 = [[1, 2, 2, -5, 6],
+                 [-1, -2, -1, 1, -1],
+                 [4, 8, 5, -8, 9],
+                 [3, 6, 1, 5, -7]]
+        ker03 = [[-2, -3, 4],
+                 [1, 0, 0],
+                 [0, 4, -5],
+                 [0, 1, 0],
+                 [0, 0, 1]]
+        self.assertTrue(matricesEqual(kernel(arr03), ker03))
+
+    def test_kernel_textbook(self):
+        arr1 = [[1, 2],
+                [3, 4]]
+        arr2 = [[1, 2, 3]]
+        arr3 = [[0, 0],
+                [0, 0]]
+        arr4 = [[2, 3],
+                [6, 9]]
         
         
 

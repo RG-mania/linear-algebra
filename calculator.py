@@ -227,21 +227,24 @@ def kernel(arr):
     offset = 0
     for i in range(arrlen):
         #BROKEN RN, NEED TO FIX
-        if arr[i][i+offset] == 0: # we have a column with no leading 1
+
+        while i+offset < len(arr[0]) and arr[i][i+offset] == 0: #for every column with no leading 1
             kernel.append([0]*len(arr[0])) #initialize empty vector
             redun_cols[i+offset] = offset # mark this column as redundant
-            # for k in range(arrlen):
-            #     kernel[offset].append(-(arr[k][i+offset]))
-            # kernel[offset][i] = 1
+            kernel[offset][i+offset] = 1
             offset += 1
+
     offset = 0
-    # for i in range(arrlen):
-    #     for j in range(len(arr[0])):
-    #         if redun_cols[j] != None: # this is a redundant column
-    #             kernel[redun_cols[j]][i] = - 
+    for i in range(arrlen):
+        leading = None
+        for j in range(len(arr[0])):
+            if leading != None and redun_cols[j] != None: # this is a redundant column after the leading 1
+                kernel[redun_cols[j]][leading] = -arr[i][j]            
+            if leading == None and arr[i][j] != 0:
+                leading = j
+
     if len(kernel) > 0:
         kernel = transpose(kernel)
-    print(redun_cols)
     return kernel
 
 """Transposes a matrix"""
