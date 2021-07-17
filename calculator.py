@@ -11,6 +11,10 @@
 """Assumes matrix is well formed, and rows and columns have consistent length"""
 #  Prints matrices in a nicely-formatted manner
 def printmatrix(mat):
+    if len(mat) == 0:
+        print("[]")
+        return
+
     dashmult = 4 #controls length of dashlines relative to matrix size
     h_len = len(mat[0])
 
@@ -209,6 +213,47 @@ def rank(arr):
                 break
     return rank
 
+"""Find the kernel of a matrix"""
+def kernel(arr):
+    if len(arr) == 0:
+        return []
+    rref(arr)
+    kernel = []
+    arrlen = len(arr)
+    redun_cols = [None]*len(arr[0])
+    # if arr[arrlen-1][len(arr[0])-1] != 0: #aka determinant is not 0, so kernel is empty
+    #     return kernel
+    # # we know the kernel is not 0??????????????
+    offset = 0
+    for i in range(arrlen):
+        #BROKEN RN, NEED TO FIX
+        if arr[i][i+offset] == 0: # we have a column with no leading 1
+            kernel.append([0]*len(arr[0])) #initialize empty vector
+            redun_cols[i+offset] = offset # mark this column as redundant
+            # for k in range(arrlen):
+            #     kernel[offset].append(-(arr[k][i+offset]))
+            # kernel[offset][i] = 1
+            offset += 1
+    offset = 0
+    # for i in range(arrlen):
+    #     for j in range(len(arr[0])):
+    #         if redun_cols[j] != None: # this is a redundant column
+    #             kernel[redun_cols[j]][i] = - 
+    if len(kernel) > 0:
+        kernel = transpose(kernel)
+    print(redun_cols)
+    return kernel
+
+"""Transposes a matrix"""
+def transpose(arr):
+    newarr = []
+    if len(arr) == 0:
+        return newarr
+    for column in range(len(arr[0])):
+        newarr.append([])
+        for row in range(len(arr)):
+            newarr[column].append(arr[row][column])
+    return newarr
 
 """Assuems matrix columns and rows have consistent lengths"""
 def multiply(arr1, arr2):
@@ -243,15 +288,18 @@ def confirm_rref(arr):
 
 
 def main():
-    arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
-    arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
-    sysEq = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
-    badSys = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
-    mat1 = [[1, 2], [3, 4]]
-    mat5 = [[1, 2, 3, 4, 5], [0,0,0,0,0]]
-    arr3 = [[3, 1, 9], [2, 1, 7]]
+    # arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
+    # arr2 = [[1, 1, 1], [2, -3, 3], [1, 2, 2]]
+    # sysEq = [[1, 1, 1, 3], [2, -3, 3, 8], [1, 2, 2, 5]]
+    # badSys = [[1, 1, 1, 3], [1, 1, 1, 4], [1, 2, 2, 5]]
+    # mat1 = [[1, 2], [3, 4]]
+    # mat5 = [[1, 2, 3, 4, 5], [0,0,0,0,0]]
+    # arr3 = [[3, 1, 9], [2, 1, 7]]
     # print(detBareiss(arr2))
     # print(linearSystem(arr3))
+    arr = [[1, 2, 3, 4]]
+
+
 
 if __name__ == "__main__":
     main()

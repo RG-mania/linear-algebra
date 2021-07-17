@@ -274,6 +274,24 @@ class TestCalculator(unittest.TestCase):
         arr2 = identity_mat(1)
         self.assertEqual(rank(arr2), 1)
 
+    def test_kernel01(self):
+        nokernel = [[1, 0],
+                    [0, 1]]
+        self.assertTrue(matricesEqual(kernel(nokernel), []))
+        arr01 = [[1, 0, 3],
+                 [0, 1, 2],
+                 [0, 0, 0]]
+        ker01 = transpose([[-3, -2, 1]])
+        self.assertTrue(matricesEqual(kernel(arr01), ker01))
+        # arr02 = [[1, 2, 3, 4],
+        #          [0, 1, 2, 3],
+        #          [0, 0, 0, 1]]
+        # ker02 = transpose([[1, -2, 1, 0]])
+        # printmatrix(kernel(arr02))
+        # self.assertTrue(matricesEqual(kernel(arr02), ker02))
+        
+        
+
 
 
 
