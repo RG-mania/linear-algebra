@@ -234,6 +234,13 @@ def kernel(arr):
             kernel[offset][i+offset] = 1
             offset += 1
 
+    # in case there aren't enough equations, we still need to find other redundant columns w/ no 0 below them
+    for i in range(arrlen+offset, len(arr[0])):
+        kernel.append([0]*len(arr[0])) #initialize empty vector
+        redun_cols[i] = offset
+        kernel[offset][i] = 1
+        offset += 1
+
     offset = 0
     for i in range(arrlen):
         leading = None
