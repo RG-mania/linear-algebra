@@ -7,6 +7,7 @@
 #Find inverse of matrix - DONE ( I think, needs more testing )
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
 #Implement GUI
+#GCD and LCM algorithms, because why not
 
 """Assumes matrix is well formed, and rows and columns have consistent length"""
 #  Prints matrices in a nicely-formatted manner
@@ -220,13 +221,12 @@ def kernel(arr):
     rref(arr)
     kernel = []
     arrlen = len(arr)
-    redun_cols = [None]*len(arr[0])
+    redun_cols = [None]*len(arr[0]) #stores redundant columns and their position
     # if arr[arrlen-1][len(arr[0])-1] != 0: #aka determinant is not 0, so kernel is empty
     #     return kernel
     # # we know the kernel is not 0??????????????
     offset = 0
     for i in range(arrlen):
-        #BROKEN RN, NEED TO FIX
 
         while i+offset < len(arr[0]) and arr[i][i+offset] == 0: #for every column with no leading 1
             kernel.append([0]*len(arr[0])) #initialize empty vector
@@ -235,6 +235,8 @@ def kernel(arr):
             offset += 1
 
     # in case there aren't enough equations, we still need to find other redundant columns w/ no 0 below them
+    # only kicks in for a situation such as [[1, 0, 5, 7]
+    #                                        [0, 1, 2, 8]]
     for i in range(arrlen+offset, len(arr[0])):
         kernel.append([0]*len(arr[0])) #initialize empty vector
         redun_cols[i] = offset
@@ -243,12 +245,20 @@ def kernel(arr):
 
     offset = 0
     for i in range(arrlen):
-        leading = None
+        leading_col = None
         for j in range(len(arr[0])):
-            if leading != None and redun_cols[j] != None: # this is a redundant column after the leading 1
-                kernel[redun_cols[j]][leading] = -arr[i][j]            
-            if leading == None and arr[i][j] != 0:
-                leading = j
+            if leading_col != None and redun_cols[j] != None: # this is a redundant column after the leading 1
+                temp = -arr[i][j]/leader
+                if temp.is_integer():
+                    temp = int(temp)
+                kernel[redun_cols[j]][leading_col] = temp
+                # note - dividing by the leader presents a possibility of ending up with non-integers in
+                # the kernel. There is a more elegant solution here that involves scaling temp and the leader,
+                # but it would likely require implementing a LCM algorithm, which would require more computational
+                # complexity. No plans on implementing this feature unless deemed necessary. 
+            if leading_col == None and arr[i][j] != 0:
+                leading_col = j
+                leader = arr[i][j]
 
     if len(kernel) > 0:
         kernel = transpose(kernel)
