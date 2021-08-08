@@ -264,6 +264,27 @@ def kernel(arr):
         kernel = transpose(kernel)
     return kernel
 
+"""Returns the basis of the image of the matrix"""
+def image(arr):
+    ker_arr = dup_mat(arr)
+    rref(ker_arr)
+    offset = 0
+    non_redun_cols = []
+    for i in range(len(arr)):
+        while i+offset < len(ker_arr[0]) and ker_arr[i][i+offset] == 0:
+            offset += 1
+        if i+offset < len(ker_arr[0]):
+            non_redun_cols.append(i+offset)
+    #at this point we have the list of all the non-redundant columns
+    #we just need to eliminate the redundant ones from the original matrix
+
+    for i in range(len(arr)):
+        new_row = []
+        for j in non_redun_cols:
+            new_row.append(arr[i][j])
+        arr[i] = new_row
+    return arr
+
 """Transposes a matrix"""
 def transpose(arr):
     newarr = []

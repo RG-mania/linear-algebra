@@ -325,6 +325,24 @@ class TestCalculator(unittest.TestCase):
                 [0,   1]]
         self.assertTrue(matricesEqual(kernel(arr5), ker5))
 
+    def test_image01(self):
+        arr1 = [[1, 2],
+                [3, 4]]
+        im1 = dup_mat(arr1)
+        self.assertTrue(matricesEqual(image(arr1), im1))
+        arr2 = [[1, 2, 3, 4],
+                [0, 1, 2, 2]]
+        im2 = [[1, 2],
+               [0, 1]]
+        self.assertTrue(matricesEqual(image(arr2), im2))
+        arr3 = [[1, 2, 3]]
+        im3 = [[1]]
+        self.assertTrue(matricesEqual(image(arr3), im3))
+        arr4 = [[1, 3, 2, 8],
+                [0, 0, 3, 2]]
+        im4 = [[1, 2],
+               [0, 3]]
+        self.assertTrue(matricesEqual(image(arr4), im4))
 
 if __name__ == '__main__':
    unittest.main()
