@@ -333,7 +333,7 @@ def confirm_rref(arr):
     return True
 
 """Performs Gram-Schmidt orthogonalization on matrix"""
-def GSorthog(arr):
+def GS_orthog(arr):
     pass
 
 def dot(v1, v2):
@@ -371,6 +371,19 @@ def scale(vec, scalar):
         newvec.append(vec[i]*scalar)
     return newvec
 
+"""Subtracts vector v2 from vector v1"""
+def vsubtract(v1, v2):
+    if not len(v1) == len(v2):
+        raise ValueError("Vector lengths do not match")
+    else:
+        newvec = []
+        for i in v1:
+            newvec.append(v1[i]-v2[i])
+        return newvec
+
+"""Projects v2 onto v1 and returns the result"""
+def proj(v1, v2):
+    pass
 
 def main():
     # arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
