@@ -1,13 +1,17 @@
+from math import *
+
 #TODO:
 #UNITTESTING!!!!!!!!!!!!!!!!
 #Solve systems of equations - DONE ( I think, needs more testing )
 #Gram-Schmidt Orthogonalization
-#Finding image/kernel of matrix
+#Finding image/kernel of matrix - DONE ( I think, needs more testing )
 #Finding rank of matrix - DONE ( I think, needs more testing )
 #Find inverse of matrix - DONE ( I think, needs more testing )
 #Find eigenvalues / eigenvectors of 2x2 and 3x3 matrices (if they exist)
 #Implement GUI
 #GCD and LCM algorithms, because why not
+#root finding algorithms for polynomials
+#square root and more? not sure
 
 """Assumes matrix is well formed, and rows and columns have consistent length"""
 #  Prints matrices in a nicely-formatted manner
@@ -183,10 +187,11 @@ def invert(arr):
 
     if not isSquare(arr):
         raise ValueError("Matrix is not square")
-    determinant = detBareiss(dup_mat(arr))
+    determinant = detBareiss(dup_mat(arr)) #technically doing double work here, but it's clearer
     if determinant == 0:
         raise ValueError("Matrix is not invertible (determinant 0)")
 
+    #append an identity matrix to the right
     identity = identity_mat(len(arr))
     for i in range(len(arr)):
         arr[i].extend(identity[i])
@@ -327,6 +332,45 @@ def confirm_rref(arr):
                     return False
     return True
 
+"""Performs Gram-Schmidt orthogonalization on matrix"""
+def GSorthog(arr):
+    pass
+
+def dot(v1, v2):
+    if not len(v1) == len(v2):
+        raise ValueError("Vector lengths do not match")
+    else:
+        sum = 0
+        for i in v1:
+            sum += v1[i] * v2[i]
+        return sum
+
+"""Finds the magnitude of a vector"""
+def magnitude(vec):
+    sum = 0
+    for i in vec:
+        sum += vec[i]*vec[i]
+    return sqrt(vec)
+
+"""Finds the greatest common divisor of two numbers using the Euclidean algorithm"""
+def gcd(a, b):
+    if a == 0:
+        return b
+    if b == 0:
+        return a
+    else:
+        q = int(floor(a/b))
+        r = int(a - b*q)
+        print("q: ", q, " r: ", r)
+        return gcd(b, r)
+
+"""Scales a vector by a scalar and returns the result"""
+def scale(vec, scalar):
+    newvec = []
+    for i in vec:
+        newvec.append(vec[i]*scalar)
+    return newvec
+
 
 def main():
     # arr = [[1, -4, 1, 2], [-1, 4, 4, 1], [3, 3, 3, 4], [2, 5, 2, -1]]
@@ -339,6 +383,14 @@ def main():
     # print(detBareiss(arr2))
     # print(linearSystem(arr3))
     arr = [[1, 2, 3, 4]]
+    done = False
+    while (not done):
+        print("Greatest common divisor, enter two integers: ")
+        int1 = float(input("int1: "))
+        if int1 == 66:
+            done = True
+        int2 = float(input("int2: "))
+        print ("result: ", gcd(int1, int2))
 
 
 
